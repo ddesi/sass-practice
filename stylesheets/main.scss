@@ -1,0 +1,131 @@
+@import 'bourbon/bourbon';
+// animation docs http://bourbon.io/docs/#animation
+
+$default-bg: #bf9ff4;
+
+$primary-color: #333;
+
+$highlights: #ff6b6b;
+
+
+// i would use this if i had different user pics for example:
+$array: orlando, jordan, anton;
+@each $person in $array {
+	.font-#{$person} {
+		font-size: 3em;
+	}
+}
+
+@mixin border-radius($radius) {
+	-webkit-border-radius: $radius;        
+	-moz-border-radius: $radius;         
+	-ms-border-radius: $radius;          
+	-o-border-radius: $radius;             
+	border-radius: $radius;   
+}   
+
+@mixin black($opacity) {
+	background-color: #000;
+	opacity: $opacity; 
+}
+
+body {
+  background-color:$default-bg;   
+  padding: 1em;
+  color: $primary-color;
+  }
+
+.box { 
+	margin: 0 auto;
+	width:10em;
+	@include border-radius(10px); 
+	border: 4px solid #000;
+	background: tint(orange, 50%); // <-- bourbon is working 
+	text-align: center;
+}
+
+.example-div {
+	margin: 0 auto;
+	@include black(0.5);
+	width: 20em;
+	height: 10em;
+	color: #fff;
+	text-align: center;
+}
+
+div.bubble { // <-- from tutorial
+	margin: 0 auto;
+  	width: 4em;
+  	height: 4em;
+  	text-align: center;
+  	padding: 2em;
+  	background: #fff;
+  	@include animation(fromSquareToCircle 2s 1s infinite alternate);
+}
+
+@include keyframes(fromSquareToCircle) {
+	0% {
+		border-radius: 0 0 0 0;
+    	background: #fff;
+    	@include transform(rotate(0deg) translateX(0px));
+    }
+  	25% {
+    	border-radius: 50% 0 0 0;
+    	background: hotpink;
+    	@include transform(rotate(0deg) translateX(250px));
+  	}
+  	50% {
+    	border-radius: 50% 50% 0 0;
+    	background: darksalmon;
+    	@include transform(rotate(0deg) translateX(500px));
+  	}
+  	75% {
+    	border-radius: 50% 50% 50% 0;
+    	background: #fff;
+    	transform: rotate(135deg);
+    	@include transform(rotate(0deg) translateX(250px));
+  	}
+  	100% {
+    	border-radius: 50% 50% 50% 50%;
+    	background: hotpink;
+    	@include transform(rotate(0deg) translateX(0px));
+  	}
+}
+
+
+.box:hover {
+  @include animation(scale 1.0s ease-in, slide 2.0s ease);
+}
+
+@include keyframes(scale) {
+  0%, 100% {
+    @include transform(scale(1));
+  }
+  50% {
+    @include transform(scale(2));
+  }
+}
+
+@include keyframes(slide) {
+  0%, 100% {
+    left: 0;
+  }
+  50% {
+    left: 100%;
+  }
+}
+
+.box {
+	margin: 0 auto;
+  	width: 8em;
+  	height: 8em;
+  	padding:2em;
+  	background: coral;
+  	border-radius: 50%;
+}
+
+
+
+
+
+
